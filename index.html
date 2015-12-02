@@ -1,11 +1,86 @@
 <html>
-	<head><title></title></head>
+	<head><title></title>
+		<style type="text/css">
+			* {
+				font-family: arial, sans-serif;
+				font-size: 20px;
+				line-height: 18.2px;
+			}
+			
+			.data-element-row {
+				margin: 10px;
+				max-width: 500px;
+			}
+
+			.data-element-row input,
+			.data-element-row textarea {
+				width: 100%;
+			}
+
+			.data-element-row textarea {
+				height: 200px;
+			}
+
+			.data-element-row-stacked input	{
+				display: inline-block;
+				max-width: 40%;
+			}
+
+			.data-element-row-stacked input[type="checkbox"] {
+				max-width: 15px;
+			}
+
+			.data-element-row-stacked::after {
+			     visibility: hidden;
+			     display: block;
+			     font-size: 0;
+			     content: " ";
+			     clear: both;
+			     height: 0;
+		     }
+
+			.template {
+				/*display: none;*/
+			}
+
+			button {
+				background-color: #75a5ff;
+				border: 1px solid grey;
+				border-radius: 3px;
+				padding: 10px;
+			}
+
+			button:hover {
+				background-color: #4d8bff;
+				cursor: pointer;
+			}
+		</style>
+	</head>
 	<body>
-		<div>Title</div>
-		<div>Icon</div>
-		<div>Url</div>
-		<div>Key 1</div><div>Name 1</div><div>Value 1</div><div>Is Password 1</div>
-		<div>Add new KVP</div>
-		<div>Script</div>
+		<div class"data-element-block-title">Target</div>
+
+		<div class="data-element-row">
+			<input data-element="title" title="Title" placeholder="Title"></input>
+		</div>
+		<div class="data-element-row">
+			<input data-element="page-url" title="Page Url" placeholder="Page Url"></input>
+		</div>
+		<div class="data-element-row">
+			<input data-element="icon-url" title="Icon Url" placeholder="Icon Url"></input>
+		</div>
+		
+		<div class"data-element-block-title">Variables</div>
+		<div class="template kvp-template data-element-row data-element-row-stacked">
+			<input data-element="key" data-group="{group}" title="Key" placeholder="Key"></input>
+			<input data-element="label" data-group="{group}" title="KVP Label" placeholder="Label"></input>
+			<input type="checkbox" data-group="{group}" id="mask-input-{key}" data-element="mask-input" title="Mask input"></input>
+			<label for="mask-input-{key}">Mask</label>
+		</div>
+		<div class="data-element-row"><button>Add new KVP</button></div>
+		
+		<div class"data-element-block-title">Action</div>
+		<div class="data-element-row">
+			<textarea data-element="script" title="Script to inject" placeholder="document.getElementById(''"></textarea>
+		</div>		
 	</body>
 </html>
