@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>Concur Chrome Commander</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+	<body>
+		<div class"data-element-block-title">Target</div>
+
+		<div class="data-element-row">
+			<input data-element="title" title="Title" placeholder="Title"></input>
+		</div>
+		<div class="data-element-row">
+			<input data-element="page-url" title="Page Url" placeholder="Page Url"></input>
+		</div>
+		<div class="data-element-row">
+			<input data-element="icon-url" title="Icon Url" placeholder="Icon Url"></input>
+		</div>
+		
+		<div class"data-element-block-title">Variables</div>
+		<div>
+			<div class="template kvp-template data-element-row data-element-row-stacked">
+				<input data-element="key" data-group="{group}" title="Key" placeholder="Key"></input>
+				<input data-element="label" data-group="{group}" title="KVP Label" placeholder="Label"></input>
+				<input type="checkbox" data-group="{group}" id="mask-input-{group}" data-element="mask-input" title="Mask input"></input>
+				<label for="mask-input-{group}">Mask</label>
+			</div>
+		</div>
+		<div id="add-new-kvp" class="data-element-row"><button>Add new KVP</button></div>
+		
+		<div class"data-element-block-title">Action Script</div>
+		<div class="data-element-row">
+			<textarea data-element="script" title="Script to inject" placeholder='var el = document.getElementById;
+
+el("user-signin").value = "{key1}";
+el("pass-signin").value = "{key2}";
+
+el("submit-button").click();
+			'></textarea>
+		</div>
+
+		<div id="create-package" class="data-element-row"><button>Package</button></div>
+
+		<script src="configuration.js"></script>
+	</body>
+</html>
+ 

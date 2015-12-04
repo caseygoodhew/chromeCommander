@@ -1,0 +1,12 @@
+{
+	"manifest_version": 2,
+	"name": "Concur Chrome Commander",
+	"description": "Allows scripts to be setup and executed against specific pages",
+	"version": "1.0",
+	"browser_action": {
+		"default_popup": "list.html"
+	},
+	"permissions": [
+		"activeTab"
+	]
+}
