@@ -18,7 +18,7 @@
 		
 		<div class"data-element-block-title">Variables</div>
 		<div>
-			<div class="template kvp-template data-element-row data-element-row-stacked">
+			<div class="template kvp-template data-element-row data-element-row-stacked" data-group="{group}">
 				<input data-element="key" data-group="{group}" title="Key" placeholder="Key"></input>
 				<input data-element="label" data-group="{group}" title="KVP Label" placeholder="Label"></input>
 				<input type="checkbox" data-group="{group}" id="mask-input-{group}" data-element="mask-input" title="Mask input"></input>
@@ -38,8 +38,8 @@ el("submit-button").click();
 			'></textarea>
 		</div>
 
-		<div id="create-package" class="data-element-row"><button>Package</button></div>
-
+		<div id="create-package" class="data-element-row"><button>Save Package</button></div>
+		<div id="load-package" class="data-element-row"><button>Open Package</button></div>
 		<script src="configuration.js"></script>
 	</body>
 </html>

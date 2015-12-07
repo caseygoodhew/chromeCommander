@@ -49,16 +49,19 @@ var addNewKVPRow = function() {
 	var el = document.getElementsByClassName('kvp-template')[0];
 	
 	var node = document.createElement('x');
-	node.innerHTML = String.format(el.outerHTML, { group: makeid() });
+	var groupId = makeid();
+	node.innerHTML = String.format(el.outerHTML, { group: groupId });
 	
 	var templates = node.getElementsByClassName('template');
 	for (var i = 0; i < templates.length; i++) {
-		templates[i].className = templates[i].className.replace(/\btemplate\b/gi,'');
+		templates[i].className = templates[i].className.replace(/(?:^|\s)template(?!\S)/gi,'');
 	}
 
 	while (node.childNodes.length) {
 		el.parentNode.appendChild(node.firstChild);
 	}
+
+	return groupId;
 }
 
 addNewKVPRow();
@@ -111,17 +114,68 @@ var packageData = function() {
 		if (!isEmpty) {
 			data.map.push(m);
 		}
-	}
+	}	
 
 	return data;
+};
+
+var loadData = function(data) {
+	
+	var kvpElements = document.getElementsByClassName('kvp-template');
+	debugger;
+	for (var i = 0; i < kvpElements.length; i++) {
+		if (!kvpElements[i].classList.contains('template')) {
+			kvpElements[i].parentNode.removeChild(kvpElements[i]);
+		}
+	}
+
+	var inputs = Array.prototype.slice.call(document.getElementsByTagName('input'));
+	var textareas = Array.prototype.slice.call(document.getElementsByTagName('textarea'));
+	var elements = inputs.concat(textareas);
+	var elementMap = {};
+
+	for (var i = 0; i < elements.length; i++) {
+		elementMap[elements[i].getAttribute('data-element')] = elements[i];
+	}
+
+	for (var key in data) {
+		if (key !== 'map') {
+			debugger;
+			elementMap[key].value = data[key];
+		}
+	}
+
+	for (var i = 0 ; i < data.map.length; i++) {
+		alert('do this!')
+	}
+
 }
 
 document.getElementById('add-new-kvp').addEventListener('click', addNewKVPRow);
 
 document.getElementById('create-package').addEventListener('click', function() {
-	var data = packageData();
-	
-
-
-	debugger;
+	chrome.storage.sync.set({ 'value': packageData() });
 });
+
+document.getElementById('load-package').addEventListener('click', function() {
+	chrome.storage.sync.get('value', function(data) {
+		loadData(data.value);
+	});
+});
+
+
+
+if (!chrome.storage) {
+	chrome.storage = { data: {}, sync: {
+		get: function(key, callback) {
+			if (callback) {
+				var obj = {};
+				obj[key] = chrome.storage.data[key];
+				callback(obj);
+			}
+		},
+		set: function(obj) {
+			apply(chrome.storage.data, obj);
+		}
+	}}
+}
